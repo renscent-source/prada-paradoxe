@@ -1,0 +1,1063 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prada Paradoxe | Premium Decants</title>
+  <meta name="description"
+    content="Ultimate mobile-first minimalist perfume decant page with a premium ordering flow." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f5f7fc;
+      --surface: #ffffff;
+      --surface-soft: #f8faff;
+      --text: #161b2f;
+      --muted: #5f6782;
+      --line: #e5eaf7;
+      --accent: #2f6bff;
+      --accent-2: #4f46e5;
+      --accent-soft: #eaf0ff;
+      --danger: #be3f3f;
+      --danger-soft: #fff2f2;
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 14px;
+      --shadow: 0 22px 62px rgba(18, 28, 60, 0.1);
+      --shadow-cta: 0 14px 34px rgba(47, 107, 255, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(79, 70, 229, 0.08), transparent 36%),
+        radial-gradient(circle at 100% 0%, rgba(47, 107, 255, 0.1), transparent 34%),
+        linear-gradient(180deg, #fdfdff 0%, var(--bg) 100%);
+      min-height: 100vh;
+      padding-bottom: calc(94px + env(safe-area-inset-bottom));
+    }
+
+    .site {
+      width: min(1180px, 94vw);
+      margin: 0 auto;
+      padding: 16px 0 40px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
+
+    .brand {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.25rem, 2.8vw, 1.85rem);
+      letter-spacing: 0.03em;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(8px);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding: 12px;
+    }
+
+    .media {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      min-height: 0;
+      background: #edf2ff;
+    }
+
+    .media::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 46%;
+      background: linear-gradient(180deg, rgba(7, 11, 25, 0) 0%, rgba(8, 12, 27, 0.26) 100%);
+      pointer-events: none;
+    }
+
+    .media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.95) contrast(1.05);
+      transform: scale(1.015);
+    }
+
+    .floating-note {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      right: 12px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 8px;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+
+    .chip {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.74);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #20294a;
+      backdrop-filter: blur(8px);
+    }
+
+    .content {
+      padding: 6px 6px 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .kicker {
+      margin: 0;
+      color: var(--accent-2);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 8px 0 8px;
+      font-size: clamp(2rem, 9vw, 3.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.68;
+      font-size: 0.96rem;
+      max-width: 52ch;
+    }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .hl {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 12px;
+    }
+
+    .hl strong {
+      display: block;
+      font-size: 0.77rem;
+      color: var(--muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hl span {
+      font-weight: 800;
+      font-size: 0.95rem;
+    }
+
+    .order {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+    }
+
+    .orderHead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .orderHead small {
+      display: block;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+    }
+
+    .price {
+      font-size: 1.03rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      min-height: 50px;
+      border-radius: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+      font-family: inherit;
+      letter-spacing: 0.01em;
+      font-size: 0.94rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btnMain {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+      color: #fff;
+      box-shadow: var(--shadow-cta);
+    }
+
+    .btnOrderNow,
+    .stickyBtn,
+    button[onclick="openOrderModal()"] {
+      background: linear-gradient(180deg, #121212 0%, #030303 100%);
+      color: #fff;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    .btnOrderNow:hover,
+    .stickyBtn:hover,
+    button[onclick="openOrderModal()"]:hover {
+      background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    }
+
+    .btnGhost {
+      background: #fff;
+      border-color: #d7e0fb;
+      color: #243164;
+    }
+
+    .btnGhost:hover {
+      background: #f8faff;
+    }
+
+    .details {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .detailCard {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .detailCard h2 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 16px;
+      color: #4c5574;
+      display: grid;
+      gap: 7px;
+      line-height: 1.55;
+      font-size: 0.92rem;
+    }
+
+    .mobileSticky {
+      position: fixed;
+      left: 10px;
+      right: 10px;
+      bottom: max(10px, env(safe-area-inset-bottom));
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 12px 34px rgba(14, 20, 44, 0.18);
+      backdrop-filter: blur(12px);
+      padding: 9px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+      transform-origin: center bottom;
+      will-change: transform, opacity, filter;
+      transition:
+        opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.56s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.56s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .mobileSticky.is-hidden {
+      opacity: 0;
+      transform: translateY(calc(100% + 16px)) scale(0.96);
+      filter: blur(6px);
+      box-shadow: 0 4px 14px rgba(14, 20, 44, 0.08);
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mobileSticky {
+        transition: none;
+      }
+    }
+
+    .stickyText {
+      display: grid;
+      gap: 2px;
+      padding-left: 3px;
+    }
+
+    .stickyText small {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .stickyText strong {
+      font-size: 0.93rem;
+      letter-spacing: -0.01em;
+    }
+
+    .stickyBtn {
+      min-height: 43px;
+      border-radius: 11px;
+      border: 0;
+      color: #fff;
+      padding: 0 15px;
+      font-weight: 800;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 12, 28, 0.45);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+      z-index: 55;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal.is-open {
+      display: flex;
+    }
+
+    .modalCard {
+      width: 100%;
+      max-width: 560px;
+      border-radius: 20px 20px 0 0;
+      border: 1px solid #e7ecfa;
+      background: #fff;
+      box-shadow: 0 -16px 48px rgba(17, 25, 52, 0.2);
+      padding: 20px 16px calc(18px + env(safe-area-inset-bottom));
+      animation: fadeUp 0.24s ease;
+    }
+
+    .modalCard h3 {
+      margin: 0 0 6px;
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .muted {
+      margin: 0 0 15px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .sizeGrid {
+      display: grid;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .sizeBtn {
+      width: 100%;
+      text-align: left;
+      border: 1px solid #dde6ff;
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px;
+      font-family: inherit;
+      font-size: 0.93rem;
+      font-weight: 800;
+      cursor: pointer;
+      color: #223061;
+      transition: background-color 0.18s ease, border-color 0.18s ease;
+    }
+
+    .sizeBtn:hover {
+      background: #f7f9ff;
+      border-color: #cfdaf8;
+    }
+
+    .sizeBtn small {
+      display: block;
+      color: #677298;
+      font-weight: 600;
+      margin-top: 4px;
+      font-size: 0.79rem;
+    }
+
+    .form {
+      display: grid;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .priceBreakdown {
+      border: 1px solid #d9e2fb;
+      background: #f8faff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .priceRow {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      column-gap: 14px;
+      font-size: 0.9rem;
+      color: #374266;
+      line-height: 1.2;
+    }
+
+    .priceRow span {
+      padding-right: 6px;
+    }
+
+    .priceRow strong {
+      color: #1a2551;
+      font-size: 0.92rem;
+      min-width: 92px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .priceRow.total {
+      margin-top: 2px;
+      padding-top: 10px;
+      border-top: 1px solid #d9e2fb;
+      font-weight: 800;
+    }
+
+    .priceRow.total strong {
+      font-size: 1rem;
+      color: #13204a;
+    }
+
+    input {
+      width: 100%;
+      min-height: 44px;
+      padding: 11px 12px;
+      border: 1px solid #d9e2fb;
+      border-radius: 10px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+      font-size: 0.93rem;
+    }
+
+    input:focus {
+      outline: 2px solid #e8eeff;
+      border-color: #bfd0ff;
+    }
+
+    .error {
+      color: var(--danger);
+      background: var(--danger-soft);
+      border: 1px solid #f0d1d1;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.86rem;
+      display: none;
+      margin-bottom: 10px;
+    }
+
+    .success {
+      color: #1c6f47;
+      background: #ecf9f1;
+      border: 1px solid #c8ebd8;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.86rem;
+      display: none;
+      margin-bottom: 10px;
+    }
+
+    .modalActions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btnCancel {
+      border-color: #dbe4fb;
+      background: #f8faff;
+      color: #394367;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: reveal 0.48s ease forwards;
+    }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (min-width: 760px) {
+      .site {
+        width: min(1160px, 92vw);
+        padding-top: 22px;
+      }
+
+      .hero {
+        padding: 18px;
+        gap: 20px;
+      }
+
+      .highlights {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .actions {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .details {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .modal {
+        align-items: center;
+        padding: 14px;
+      }
+
+      .modalCard {
+        border-radius: 24px;
+        padding: 22px;
+      }
+    }
+
+    @media (min-width: 980px) {
+      body {
+        padding-bottom: 0;
+      }
+
+      .hero {
+        grid-template-columns: 1.02fr 0.98fr;
+      }
+
+      .media {
+        min-height: 0;
+        aspect-ratio: 1 / 1;
+      }
+
+      .content {
+        padding: clamp(20px, 2.4vw, 34px);
+      }
+
+      .mobileSticky {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="site reveal">
+    <section class="card hero">
+      <div class="media">
+        <img src="image-paradoxe.jpg" alt="Prada Paradoxe perfume bottle" />
+        <div class="floating-note">
+          <span class="chip">Floral Amber</span>
+          <span class="chip">Long Lasting</span>
+          <span class="chip">Elegant Signature</span>
+        </div>
+      </div>
+
+      <div class="content">
+        <div>
+          <p class="kicker">Women Perfume</p>
+          <h1>Prada Paradoxe</h1>
+          <p class="lead">A luminous white-floral signature wrapped in smooth amber warmth. Feminine, modern, and
+            refined for everyday elegance and special evenings.</p>
+        </div>
+
+        <div class="highlights">
+          <div class="hl">
+            <strong>Top</strong>
+            <span>Neroli Blossom</span>
+          </div>
+          <div class="hl">
+            <strong>Heart</strong>
+            <span>Jasmine Accord</span>
+          </div>
+          <div class="hl">
+            <strong>Base</strong>
+            <span>Amber & Musk</span>
+          </div>
+        </div>
+
+        <div class="order" id="priceCase">
+          <div class="orderHead">
+            <div>
+              <small>Selected Option</small>
+              <div class="price" id="sizePrice">10ml - 149 DH</div>
+            </div>
+            <div class="pill">Fast Delivery</div>
+          </div>
+          <div class="actions">
+            <button class="btn btnGhost" type="button" onclick="openSizeModal()">Select Size</button>
+            <button class="btn btnMain btnOrderNow" type="button" onclick="openOrderModal()">Order Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="details">
+      <article class="detailCard">
+        <h2>Why this scent stands out</h2>
+        <ul class="list">
+          <li>Balanced between bright florals and warm sensual depth.</li>
+          <li>Feels premium without being overpowering in daily wear.</li>
+          <li>Perfect for confident, clean, modern feminine styling.</li>
+        </ul>
+      </article>
+      <article class="detailCard">
+        <h2>Decant quality promise</h2>
+        <ul class="list">
+          <li>100% original fragrance transferred with sterile tools.</li>
+          <li>Leak-resistant decant bottles with secure packaging.</li>
+          <li>Freshly prepared on order for best first-spray experience.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <aside class="mobileSticky" id="mobileSticky">
+    <div class="stickyText">
+      <small>Selected Option</small>
+      <strong id="stickyPrice">10ml - 149 DH</strong>
+    </div>
+    <button class="stickyBtn" type="button" onclick="openOrderModal()">Order Now</button>
+  </aside>
+
+  <div class="modal" id="sizeModal" aria-hidden="true">
+    <div class="modalCard">
+      <h3>Choose your size</h3>
+      <p class="muted">Pick the format that fits your routine. You can update it before confirming your order.</p>
+      <div class="sizeGrid">
+        <button class="sizeBtn" type="button" onclick="chooseSize('5ml', '79 DH')">
+          5ml - 79 DH
+          <small>Perfect for testing the scent.</small>
+        </button>
+        <button class="sizeBtn" type="button" onclick="chooseSize('10ml', '149 DH')">
+          10ml - 149 DH
+          <small>Most popular everyday size.</small>
+        </button>
+      </div>
+      <button class="btn btnGhost btnCancel" type="button" onclick="closeSizeModal()">Cancel</button>
+    </div>
+  </div>
+
+  <div class="modal" id="orderModal" aria-hidden="true">
+    <div class="modalCard">
+      <h3>Complete your order</h3>
+      <p class="muted" id="orderSummary">Prada Paradoxe - 10ml (149 DH)</p>
+
+      <div class="error" id="orderError">Please fill in all fields before confirming your order.</div>
+      <div class="success" id="orderSuccess">Order sent successfully. We will contact you soon.</div>
+
+      <div class="form">
+        <input id="name" placeholder="Full name" autocomplete="name" />
+        <input id="phone" placeholder="Phone number" autocomplete="tel" />
+        <input id="city" placeholder="City" autocomplete="address-level2" />
+        <input id="address" placeholder="Address" autocomplete="street-address" />
+      </div>
+
+      <div class="priceBreakdown" id="priceBreakdown">
+        <div class="priceRow">
+          <span>Decant Price</span>
+          <strong id="decantPriceValue">149 DH</strong>
+        </div>
+        <div class="priceRow">
+          <span>Delivery Price</span>
+          <strong id="deliveryPriceValue">35 DH</strong>
+        </div>
+        <div class="priceRow total">
+          <span>Total Price</span>
+          <strong id="totalPriceValue">184 DH</strong>
+        </div>
+      </div>
+
+      <div class="modalActions">
+        <button class="btn btnMain btnOrderNow" id="confirmOrderBtn" type="button" onclick="sendOrder()">Confirm Order</button>
+        <button class="btn btnGhost btnCancel" type="button" onclick="closeOrderModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <iframe name="hiddenOrderFrame" title="Hidden order submit" style="display:none;"></iframe>
+  <form id="autoOrderForm" action="https://formsubmit.co/ruby.blood.uir@gmail.com" method="POST"
+    target="hiddenOrderFrame" style="display:none;">
+    <input type="hidden" name="_subject" id="formSubject" />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="Product" value="Prada Paradoxe" />
+    <input type="hidden" name="Size" id="formSize" />
+    <input type="hidden" name="Price" id="formPrice" />
+    <input type="hidden" name="Customer Name" id="formName" />
+    <input type="hidden" name="Phone" id="formPhone" />
+    <input type="hidden" name="City" id="formCity" />
+    <input type="hidden" name="Address" id="formAddress" />
+    <input type="hidden" name="Delivery Price" id="formDeliveryPrice" />
+    <input type="hidden" name="Total Price" id="formTotalPrice" />
+    <input type="hidden" name="Message" id="formMessage" />
+  </form>
+
+  <script>
+    let selectedSize = "10ml";
+    let selectedPrice = "149 DH";
+
+    const sizeModal = document.getElementById("sizeModal");
+    const orderModal = document.getElementById("orderModal");
+    const sizePrice = document.getElementById("sizePrice");
+    const stickyPrice = document.getElementById("stickyPrice");
+    const orderSummary = document.getElementById("orderSummary");
+    const orderError = document.getElementById("orderError");
+    const orderSuccess = document.getElementById("orderSuccess");
+    const confirmOrderBtn = document.getElementById("confirmOrderBtn");
+    const autoOrderForm = document.getElementById("autoOrderForm");
+    const cityInput = document.getElementById("city");
+    const decantPriceValue = document.getElementById("decantPriceValue");
+    const deliveryPriceValue = document.getElementById("deliveryPriceValue");
+    const totalPriceValue = document.getElementById("totalPriceValue");
+    const mobileSticky = document.getElementById("mobileSticky");
+    const priceCase = document.getElementById("priceCase");
+
+    function openSizeModal() {
+      sizeModal.classList.add("is-open");
+      sizeModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeSizeModal() {
+      sizeModal.classList.remove("is-open");
+      sizeModal.setAttribute("aria-hidden", "true");
+    }
+
+    function chooseSize(size, price) {
+      selectedSize = size;
+      selectedPrice = price;
+      const label = `${selectedSize} - ${selectedPrice}`;
+      sizePrice.textContent = label;
+      stickyPrice.textContent = label;
+      orderSummary.textContent = `Prada Paradoxe - ${selectedSize} (${selectedPrice})`;
+      updatePriceBreakdown();
+      closeSizeModal();
+    }
+
+    function openOrderModal() {
+      orderSummary.textContent = `Prada Paradoxe - ${selectedSize} (${selectedPrice})`;
+      orderError.style.display = "none";
+      orderSuccess.style.display = "none";
+      confirmOrderBtn.disabled = false;
+      confirmOrderBtn.textContent = "Confirm Order";
+      orderModal.classList.add("is-open");
+      orderModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeOrderModal() {
+      orderModal.classList.remove("is-open");
+      orderModal.setAttribute("aria-hidden", "true");
+    }
+
+    function normalizeText(value) {
+      return value
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function getDecantAmount() {
+      const parsed = parseInt(selectedPrice, 10);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function getDeliveryPricing(cityValue) {
+      const normalized = normalizeText(cityValue || "");
+
+      const isUirDelivery =
+        /\buir\b/.test(normalized) ||
+        /\buniversite\b.*\binternationale\b.*\brabat\b/.test(normalized) ||
+        /\binternational\b.*\buniversity\b.*\brabat\b/.test(normalized);
+
+      if (isUirDelivery) {
+        return { amount: 0, label: "For Free" };
+      }
+
+      const isRabatArea =
+        /\brabat\b/.test(normalized) ||
+        /\bsale\b/.test(normalized) ||
+        /\bsala\s+al\s+jadida\b/.test(normalized) ||
+        /\bsale\s+al\s+jadida\b/.test(normalized) ||
+        /\btemara\b/.test(normalized);
+
+      if (isRabatArea) {
+        return { amount: 20, label: "20 DH" };
+      }
+
+      return { amount: 35, label: "35 DH" };
+    }
+
+    function updatePriceBreakdown() {
+      const decantAmount = getDecantAmount();
+      const delivery = getDeliveryPricing(cityInput ? cityInput.value : "");
+      const totalAmount = decantAmount + delivery.amount;
+
+      if (decantPriceValue) {
+        decantPriceValue.textContent = `${decantAmount} DH`;
+      }
+      if (deliveryPriceValue) {
+        deliveryPriceValue.textContent = delivery.label;
+      }
+      if (totalPriceValue) {
+        totalPriceValue.textContent = `${totalAmount} DH`;
+      }
+
+      return {
+        decantAmount,
+        deliveryAmount: delivery.amount,
+        deliveryLabel: delivery.label,
+        totalAmount,
+      };
+    }
+
+    function sendOrder() {
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const city = document.getElementById("city").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const pricing = updatePriceBreakdown();
+
+      if (!name || !phone || !city || !address) {
+        orderSuccess.style.display = "none";
+        orderError.style.display = "block";
+        return;
+      }
+
+      orderError.style.display = "none";
+      orderSuccess.style.display = "none";
+      confirmOrderBtn.disabled = true;
+      confirmOrderBtn.textContent = "Sending...";
+
+      document.getElementById("formSubject").value = `New Order - Prada Paradoxe ${selectedSize}`;
+      document.getElementById("formSize").value = selectedSize;
+      document.getElementById("formPrice").value = selectedPrice;
+      document.getElementById("formName").value = name;
+      document.getElementById("formPhone").value = phone;
+      document.getElementById("formCity").value = city;
+      document.getElementById("formAddress").value = address;
+      document.getElementById("formDeliveryPrice").value = pricing.deliveryLabel;
+      document.getElementById("formTotalPrice").value = `${pricing.totalAmount} DH`;
+      document.getElementById("formMessage").value =
+        `Order request for Prada Paradoxe (${selectedSize} - ${selectedPrice}). ` +
+        `Delivery: ${pricing.deliveryLabel}. Total: ${pricing.totalAmount} DH.`;
+
+      autoOrderForm.submit();
+
+      orderSuccess.style.display = "block";
+      orderSuccess.textContent = "Order sent successfully. We will contact you soon.";
+      confirmOrderBtn.disabled = false;
+      confirmOrderBtn.textContent = "Confirm Order";
+
+      document.getElementById("name").value = "";
+      document.getElementById("phone").value = "";
+      document.getElementById("city").value = "";
+      document.getElementById("address").value = "";
+
+      setTimeout(() => {
+        closeOrderModal();
+      }, 900);
+    }
+
+    let stickyHidden = false;
+    let stickyTicking = false;
+
+    function setStickyHidden(hidden) {
+      if (!mobileSticky || stickyHidden === hidden) {
+        return;
+      }
+
+      stickyHidden = hidden;
+      mobileSticky.classList.toggle("is-hidden", hidden);
+    }
+
+    function updateStickyVisibility() {
+      if (!mobileSticky || !priceCase) {
+        return;
+      }
+
+      if (window.matchMedia("(min-width: 980px)").matches) {
+        setStickyHidden(false);
+        return;
+      }
+
+      const cardTop = priceCase.getBoundingClientRect().top;
+      const hideThreshold = window.innerHeight * 0.68;
+      const showThreshold = window.innerHeight * 0.82;
+
+      if (!stickyHidden && cardTop <= hideThreshold) {
+        setStickyHidden(true);
+      } else if (stickyHidden && cardTop > showThreshold) {
+        setStickyHidden(false);
+      }
+    }
+
+    function requestStickyUpdate() {
+      if (stickyTicking) {
+        return;
+      }
+
+      stickyTicking = true;
+      window.requestAnimationFrame(() => {
+        updateStickyVisibility();
+        stickyTicking = false;
+      });
+    }
+
+    window.addEventListener("scroll", requestStickyUpdate, { passive: true });
+    window.addEventListener("resize", requestStickyUpdate);
+    window.addEventListener("load", requestStickyUpdate);
+    requestStickyUpdate();
+
+    if (cityInput) {
+      cityInput.addEventListener("input", updatePriceBreakdown);
+      cityInput.addEventListener("change", updatePriceBreakdown);
+    }
+    updatePriceBreakdown();
+
+    window.addEventListener("click", (event) => {
+      if (event.target === sizeModal) {
+        closeSizeModal();
+      }
+      if (event.target === orderModal) {
+        closeOrderModal();
+      }
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeSizeModal();
+        closeOrderModal();
+      }
+    });
+  </script>
+</body>
+
+</html>
+
+
+
+
+
